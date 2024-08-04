@@ -38,12 +38,12 @@ const ProjectDescription = ({ title, description, link, image }) => {
     <ProjectContainer>
       {image && <ProjectImage src={image} alt={`${title} image`} />}
       <ProjectTitle>{title}</ProjectTitle>
-      <Description>{description}</Description>
       {link && (
         <ProjectLink href={link} target="_blank" rel="noopener noreferrer">
           Project Link
         </ProjectLink>
       )}
+      <Description>{description}</Description>
     </ProjectContainer>
   );
 };
