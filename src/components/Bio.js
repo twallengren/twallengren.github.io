@@ -32,7 +32,7 @@ const InfoLabel = styled.span`
 
 const Bio = () => {
   return (
-    <BaseSection id="bio">
+    <BaseSection id="about">
       <SectionTitle>About Me</SectionTitle>
       <MaxWidthContainer>
         <ProfileImage src={profilePhoto} alt="Profile" />

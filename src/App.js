@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import './App.css';
 import AnimatedCanvas from './components/AnimatedCanvas';
 import Bio from './components/Bio';
+import Blog from './components/Blog';
+import Projects from './components/Projects';
 
 const AppHeader = styled.header`
   position: relative;
@@ -63,9 +65,8 @@ function App() {
         <ThumbnailImage src="/thumbnail.png" />
         <Navigation>
           <ul>
-            <li><a href="#bio">Bio</a></li>
-            <li><a href="#employment">Employment History</a></li>
-            <li><a href="#projects">Projects</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#projects">Projects & Publications</a></li>
             <li><a href="#blog">Blog</a></li>
           </ul>
         </Navigation>
@@ -73,6 +74,7 @@ function App() {
       </AppHeader>
       <main>
         <Bio />
+        <Projects />
       </main>
       <Footer>
         <p>&copy; {new Date().getFullYear()} Toren Wallengren. All rights reserved.</p>
