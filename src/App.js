@@ -3,9 +3,6 @@ import styled from '@emotion/styled';
 import './App.css';
 import AnimatedCanvas from './components/AnimatedCanvas';
 import Bio from './components/Bio';
-import Employment from './components/Employment';
-import Projects from './components/Projects';
-import Blog from './components/Blog';
 
 const AppHeader = styled.header`
   position: relative;
@@ -76,9 +73,6 @@ function App() {
       </AppHeader>
       <main>
         <Bio />
-        <Employment />
-        <Projects />
-        <Blog />
       </main>
       <Footer>
         <p>&copy; {new Date().getFullYear()} Toren Wallengren. All rights reserved.</p>
