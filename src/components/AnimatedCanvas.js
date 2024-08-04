@@ -14,6 +14,8 @@ const Canvas = styled.canvas`
 const AnimatedCanvas = () => {
   const canvasRef = useRef(null);
   const gridRef = useRef(new Map());
+  const targetSquareSize = 30; // Target size for the squares in pixels
+  let N, M, xSquare, ySquare;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -22,17 +24,18 @@ const AnimatedCanvas = () => {
     const updateCanvasSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+
+      N = Math.floor(canvas.width / targetSquareSize);
+      M = Math.floor(canvas.height / targetSquareSize);
+
+      xSquare = canvas.width / N;
+      ySquare = canvas.height / M;
     };
 
     updateCanvasSize();
 
-    const N = 150;
-    const M = 100;
     const T = 150;
     const borderWidth = 0.1; // The border width used in clearRect
-
-    let xSquare = canvas.width / N;
-    let ySquare = canvas.height / M;
 
     const drawSquare = (x, y) => {
       context.strokeStyle = 'rgba(255, 255, 255, 0.5)';
@@ -145,8 +148,6 @@ const AnimatedCanvas = () => {
 
     const handleResize = () => {
       updateCanvasSize();
-      xSquare = canvas.width / N;
-      ySquare = canvas.height / M;
     };
 
     window.addEventListener('mousemove', handleMouseMove);
