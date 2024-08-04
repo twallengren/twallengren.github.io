@@ -25,7 +25,7 @@ const AnimatedCanvas = () => {
     const M = 100;
     const xSquare = canvas.width / N;
     const ySquare = canvas.height / M;
-    const T = 160;
+    const T = 150;
     const borderWidth = 0.1; // The border width used in clearRect
 
     const drawSquare = (x, y) => {
