@@ -11,6 +11,7 @@ const BaseSection = styled.section`
 
 export const SectionTitle = styled.h2`
   margin-top: 0;
+  font-family: 'Bona Nova SC', serif;
 `;
 
 export default BaseSection;

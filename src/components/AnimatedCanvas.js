@@ -18,15 +18,21 @@ const AnimatedCanvas = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+
+    const updateCanvasSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    updateCanvasSize();
 
     const N = 150;
     const M = 100;
-    const xSquare = canvas.width / N;
-    const ySquare = canvas.height / M;
     const T = 150;
     const borderWidth = 0.1; // The border width used in clearRect
+
+    let xSquare = canvas.width / N;
+    let ySquare = canvas.height / M;
 
     const drawSquare = (x, y) => {
       context.strokeStyle = 'rgba(255, 255, 255, 0.5)';
@@ -38,7 +44,15 @@ const AnimatedCanvas = () => {
     };
 
     const handleMouseMove = (event) => {
-      const { clientX, clientY } = event;
+      handleInteraction(event.clientX, event.clientY);
+    };
+
+    const handleTouchMove = (event) => {
+      const touch = event.touches[0];
+      handleInteraction(touch.clientX, touch.clientY);
+    };
+
+    const handleInteraction = (clientX, clientY) => {
       const adjustedX = clientX + window.scrollX;
       const adjustedY = clientY + window.scrollY;
 
@@ -129,13 +143,23 @@ const AnimatedCanvas = () => {
       });
     };
 
-    canvas.addEventListener('mousemove', handleMouseMove);
+    const handleResize = () => {
+      updateCanvasSize();
+      xSquare = canvas.width / N;
+      ySquare = canvas.height / M;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('resize', handleResize);
 
     const intervalId = setInterval(updateGrid, 100);
 
     return () => {
       clearInterval(intervalId);
-      canvas.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

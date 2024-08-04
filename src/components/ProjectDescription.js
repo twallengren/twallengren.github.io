@@ -8,21 +8,29 @@ const ProjectContainer = styled.div`
 `;
 
 const ProjectImage = styled.img`
-  max-width: 100%;
+  max-width: 90%;
   height: auto;
   margin: 10px 0;
 `;
 
 const ProjectTitle = styled.h3`
-  margin: 10px 0;
+  margin: 0 auto 20px auto;
+  max-width: 90%;
+`;
+
+const Description = styled.p`
+  margin: 0 auto 20px auto;
+  max-width: 90%;
+  text-align: left;
 `;
 
 const ProjectLink = styled.a`
-  color: #61dafb;
+  color: #293242;
   text-decoration: none;
   &:hover {
     text-decoration: underline;
   }
+  padding: 10px;
 `;
 
 const ProjectDescription = ({ title, description, link, image }) => {
@@ -30,10 +38,10 @@ const ProjectDescription = ({ title, description, link, image }) => {
     <ProjectContainer>
       {image && <ProjectImage src={image} alt={`${title} image`} />}
       <ProjectTitle>{title}</ProjectTitle>
-      <p>{description}</p>
+      <Description>{description}</Description>
       {link && (
         <ProjectLink href={link} target="_blank" rel="noopener noreferrer">
-          View Project
+          Project Link
         </ProjectLink>
       )}
     </ProjectContainer>

@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import profilePhoto from '../assets/profile-photo.jpg';
 
 const ProfileImage = styled.img`
-  max-width: 300px;
+  max-width: 100%;
   border-radius: 20%;
   margin: 20px 0;
 `;
@@ -41,7 +41,7 @@ const Bio = () => {
             <InfoLabel>Location:</InfoLabel> Edinburgh, United Kingdom
           </li>
           <li>
-            <InfoLabel>Role:</InfoLabel> Senior Data Engineer
+            <InfoLabel>Role:</InfoLabel> Senior Data Engineer at Addepar
           </li>
           <li>
             <InfoLabel>Education:</InfoLabel> Mathematics BSc

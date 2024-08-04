@@ -13,10 +13,11 @@ const AppHeader = styled.header`
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100vh; /* Full height of the viewport */
   background-color: #282c34;
   color: white;
   overflow: hidden;
+  font-family: 'Bona Nova SC', serif;
+  height: 100vh;
 `;
 
 const ThumbnailImage = styled.img`
