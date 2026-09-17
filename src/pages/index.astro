@@ -1,0 +1,93 @@
+---
+import { Image, getImage } from 'astro:assets';
+import portrait from '../assets/profile-photo.jpg';
+import Section from '../components/Section.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Experience from '../components/Experience.astro';
+import LifeCanvas from '../components/LifeCanvas.astro';
+import { profile } from '../data/profile';
+import { projects } from '../data/projects';
+import { publication } from '../data/publication';
+import '../styles/global.css';
+
+const title = `${profile.name} — Product, mathematics & software`;
+const description = 'Staff Product Manager, Calculations at Addepar. Engineering roots, financial calculation products, and independent projects in mathematics and software.';
+const canonical = new URL('/', Astro.site);
+const socialImage = await getImage({ src: portrait, width: 800, format: 'jpg' });
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#192d33" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/icons/icon-32x32.png" sizes="32x32" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:image" content={new URL(socialImage.src, Astro.site)} />
+    <meta property="og:image:alt" content="Toren Wallengren standing beside a stone wall" />
+    <meta property="og:image:width" content={socialImage.attributes.width} />
+    <meta property="og:image:height" content={socialImage.attributes.height} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(socialImage.src, Astro.site)} />
+    <meta name="twitter:image:alt" content="Toren Wallengren standing beside a stone wall" />
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="hero" data-life-surface>
+      <div class="container hero-inner">
+        <nav class="navigation" aria-label="Main navigation">
+          <a class="wordmark" href="/" aria-label="Toren Wallengren home">TW<span aria-hidden="true">.</span></a>
+          <div class="nav-links"><a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#research">Research</a></div>
+        </nav>
+        <div class="introduction">
+          <div class="intro-copy">
+            <p class="eyebrow hero-eyebrow">Product thinking. Engineering roots.</p>
+            <h1>Toren <br />Wallengren<span class="accent">.</span></h1>
+            <p class="role">{profile.role}</p>
+            <p class="intro-description">{profile.introduction}</p>
+            <div class="social-links">{profile.links.map(link => <a href={link.url}>{link.label} <span aria-hidden="true">↗</span></a>)}</div>
+          </div>
+          <figure class="portrait">
+            <Image src={portrait} alt="Toren Wallengren standing beside a stone wall" widths={[280, 420, 560, 840]} sizes="(max-width: 380px) 72px, (max-width: 700px) 100px, (max-width: 1000px) 240px, 280px" width={280} height={420} format="webp" loading="eager" fetchpriority="high" />
+            <figcaption><span class="location-dot" aria-hidden="true"></span>{profile.location}</figcaption>
+          </figure>
+        </div>
+      </div>
+      <LifeCanvas />
+    </header>
+    <main id="main" class="container" tabindex="-1">
+      <Section id="about" number="01" title="About & experience">
+        <p class="section-intro">{profile.about}</p>
+        <Experience />
+        <div class="education"><h3>{profile.education.degree}</h3><p class="education-detail">{profile.education.institution} <span aria-hidden="true">·</span> {profile.education.dates}</p><p>{profile.education.detail}</p></div>
+      </Section>
+      <Section id="projects" number="02" title="Selected projects">
+        <p class="section-intro">Independent explorations in mathematics, modelling, and useful software.</p>
+        <div class="project-grid">{projects.map((project, index) => <ProjectCard project={project} index={index} />)}</div>
+      </Section>
+      <Section id="research" number="03" title="Research">
+        <article class="publication">
+          <p class="eyebrow">Inverse problems <span aria-hidden="true">/</span> {publication.year}</p>
+          <h3>{publication.title}</h3>
+          <p>{publication.summary}</p><p>{publication.contribution}</p>
+          <a href={publication.url}>Read the preprint on arXiv <span aria-hidden="true">↗</span></a>
+        </article>
+      </Section>
+      <Section id="contact" number="04" title="Beyond the work">
+        <p class="section-intro">{profile.interests}</p>
+        <p class="contact-invitation">Find me online.</p>
+        <div class="social-links">{profile.links.map(link => <a href={link.url}>{link.label} <span aria-hidden="true">↗</span></a>)}</div>
+      </Section>
+    </main>
+    <footer class="container footer"><p>© {new Date().getFullYear()} {profile.name}</p><a href="#top">Back to top ↑</a></footer>
+  </body>
+</html>

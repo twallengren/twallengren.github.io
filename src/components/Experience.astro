@@ -1,0 +1,15 @@
+---
+import { experience, highlights } from '../data/experience';
+---
+<div class="highlights">
+  {highlights.map(highlight => <div><h3>{highlight.title}</h3><p>{highlight.detail}</p></div>)}
+</div>
+<div id="experience" class="experience" aria-labelledby="experience-title">
+  <h3 id="experience-title" class="eyebrow">Experience</h3>
+  <ol class="timeline">
+    {experience.map(item => <li>
+      <div class="timeline-company"><h4>{item.company}</h4>{item.period && <p class="period">{item.period}</p>}</div>
+      <div><p class="timeline-role">{item.role}</p><p>{item.summary}</p></div>
+    </li>)}
+  </ol>
+</div>

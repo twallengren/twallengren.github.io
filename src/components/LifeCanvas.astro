@@ -1,0 +1,12 @@
+<life-canvas>
+  <canvas aria-hidden="true"></canvas>
+  <div class="canvas-controls" hidden>
+    <span class="canvas-hint">Move your pointer to leave a little life.</span>
+    <button type="button" aria-pressed="false">Pause animation</button>
+  </div>
+</life-canvas>
+
+<script>
+  import { LifeCanvasElement } from '../scripts/life-canvas';
+  if (!customElements.get('life-canvas')) customElements.define('life-canvas', LifeCanvasElement);
+</script>

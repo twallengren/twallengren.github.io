@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets';
+import type { Project } from '../data/projects';
+interface Props { project: Project; index: number; }
+const { project, index } = Astro.props;
+---
+<article class="project-card">
+  <div class="project-meta"><span>{project.category}</span><span aria-hidden="true">0{index + 1}</span></div>
+  {project.image && <Image src={project.image.src} alt={project.image.alt} widths={[400, 800]} sizes="(max-width: 700px) 90vw, 42vw" format="webp" loading="lazy" />}
+  <h3>{project.title}</h3>
+  <p>{project.summary}</p>
+  <ul class="technologies" aria-label="Technologies">{project.technologies.map(technology => <li>{technology}</li>)}</ul>
+  <div class="project-links">
+    {project.demo && <a href={project.demo.url} aria-label={`${project.demo.label}: ${project.title}`}>{project.demo.label} <span aria-hidden="true">↗</span></a>}
+    <a href={project.repositoryUrl} aria-label={`Source code: ${project.title}`}>Source <span aria-hidden="true">↗</span></a>
+  </div>
+</article>

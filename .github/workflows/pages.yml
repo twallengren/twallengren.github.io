@@ -1,0 +1,47 @@
+name: Check and deploy Astro site
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  ASTRO_TELEMETRY_DISABLED: '1'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check, build, and prepare Pages artifact
+        uses: withastro/action@v6
+        with:
+          node-version: '24'
+          build-cmd: npm ci && npm run check && npm test && npm run build
+      - name: Install test browsers
+        run: npx playwright install --with-deps chromium webkit
+      - name: Verify production site in browsers
+        run: npm run test:browser
+
+  deploy:
+    # PRs and manual runs from other branches can never publish.
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

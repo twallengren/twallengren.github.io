@@ -10,6 +10,11 @@
 
 # production
 /build
+/dist
+/.astro
+/playwright-report
+/test-results
+/.idea
 
 # misc
 .DS_Store
